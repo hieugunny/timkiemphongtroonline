@@ -1,0 +1,32 @@
+http://localhost:5005
+
+
+### 
+post http://localhost:5000/api/auth/register
+Content-Type: application/json
+
+{
+    "email": "user7@gmail.com",
+    "password": "123456"
+}
+ 
+###
+post http://localhost:5005/api/auth/login
+Content-Type: application/json 
+
+{
+    "email": "user7@gmail.com",
+    "password": "123456"
+}
+###
+get http://localhost:5005/api/user/getuser  
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiZW1haWwiOiJ1c2VyNEBnbWFpbC5jb20iLCJyb2xlX2NvZGUiOiJSMiIsImlhdCI6MTY5ODY5MjA1MCwiZXhwIjoxNjk5MTI0MDUwfQ.axQlWJM-oJ9AuyoJJaq2v7z8iJadvTqKmCa6DVdSkdA
+###
+get http://localhost:5005/api/book/ 
+###
+post http://localhost:5005/api/auth/generatetoken
+Content-Type: application/json 
+
+{
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjk5NzI3MDI0LCJleHAiOjE3MDAxNTkwMjR9.wO0TTdeqAr-3yzmu38Cak6mkIc7CrS0aKk8pAi8m-Tc"
+}

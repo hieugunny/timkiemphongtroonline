@@ -1,0 +1,5 @@
+Ok hãy liệt kê các việc cần làm ra nào 
+Hôm qua đã xem qua video #8 verify token and phân quyền user
+Hôm nay sẽ tổng kết lại các kiến thức đã học
+-mddw verify token
+#9 associate sequelize   

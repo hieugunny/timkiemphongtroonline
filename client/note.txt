@@ -1,0 +1,9 @@
+folder: 
+    store: redux
+        actions:
+        reducers: 
+            rootReducer: cấu hình persist, kiểu như cấu hình những state nào sẽ được lưu ở localstorage
+    component: dành cho những phần dùng nhiều vd: header,...
+    container: chứa tất cả các trang
+    service: gọi api 
+    ultils: chứa file data ????
