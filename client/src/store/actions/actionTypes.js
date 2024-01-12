@@ -10,12 +10,13 @@ const  actionTypes = {
     GET_CATEGORY:'GET_CATEGORY',
 
     GET_POST : 'GET_POST',
+    ONE_POST : 'ONE_POST',
     
     GET_PROVINCE : 'GET_PROVINCE',
     GET_DISTRICT : 'GET_DISTRICT',
     GET_WARD : 'GET_WARD',
 
-    SEARCH : 'SEARCH'
+    FAVOURITE : 'FAVOURITE'
 
 }
 export default actionTypes

@@ -1,14 +1,28 @@
 import actionTypes from './actionTypes'
-export const setSearch = (value) => async (dispatch) => {
+
+export const setCountFavourite = (value) => async (dispatch) => {
     try {
         dispatch({ 
-            type: actionTypes.SEARCH,
-            isSearch: value
+            type: actionTypes.FAVOURITE,
+            count: value
         })
     } catch (error) {
         dispatch({
-            type: actionTypes.GET_POST,
-            isSearch: false
+            type: actionTypes.FAVOURITE,
+            count: -1
+        })
+    }
+} 
+ export const setSearch = (value) => async (dispatch) => {
+    try {
+        dispatch({ 
+            type: actionTypes.FAVOURITE,
+            count: value
+        })
+    } catch (error) {
+        dispatch({
+            type: actionTypes.FAVOURITE,
+            count: -1
         })
     }
 }  

@@ -1,6 +1,6 @@
 import joi from 'joi'
 
-export const mobile = joi.string().pattern(/^\d{10,11}$/).required()
+export const mobile = joi.string().pattern(/^\d{9,10}$/).required()
 export const password = joi.string().min(6).required()
     
 export const name = joi.string().required()

@@ -18,6 +18,9 @@ module.exports = {
       mobile: {
         type: Sequelize.STRING
       },
+      zalo: {
+        type: Sequelize.STRING
+      },
       password: {
         type: Sequelize.STRING
       },
@@ -133,6 +136,9 @@ module.exports = {
       category_code: {
         type: Sequelize.STRING
       }, 
+      numberHouse: {
+        type: Sequelize.STRING
+      },
       street: {
         type: Sequelize.STRING
       },
@@ -170,8 +176,16 @@ module.exports = {
       star: {
         type: Sequelize.STRING
       },
+      isHidden: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
+      },
       expiredAt: {
-        allowNull: false,
+        allowNull: true,
+        type: Sequelize.DATE
+      },
+      startedAt: {
+        allowNull: true,
         type: Sequelize.DATE
       },
       createdAt: {

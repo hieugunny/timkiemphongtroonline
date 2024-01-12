@@ -105,7 +105,7 @@ export const insertMotel = () => new Promise(async (resolve, reject) => {
                 street: street,
                 ward: ward,
                 district: district,
-                province: province
+                province: `${province}`
             }
         }
         const rentalObjectHandler = (rentalObject) => {

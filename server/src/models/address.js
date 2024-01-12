@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Address.hasOne(models.Post, {foreignKey: 'address', targetKey:'fullAddress',as: 'postData'})
+      // Address.hasOne(models.Post, {foreignKey: 'address', targetKey:'fullAddress',as: 'postData'})
 
     }
   }

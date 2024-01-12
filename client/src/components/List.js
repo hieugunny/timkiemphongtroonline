@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Header, Navigation } from '../containers/public'
-import { Outlet, useLocation, useSearchParams } from 'react-router-dom'
+import { Outlet, useLocation, useParams, useSearchParams } from 'react-router-dom'
 import { Button, Item } from '.'
 import { getPosts } from '../store/actions'
 import { useDispatch, useSelector } from 'react-redux'
@@ -9,9 +9,7 @@ const List = () => {
   const { data, msg, count } = useSelector(state => state.post)
   const location = useLocation()
   const [searchParams, setSearchParams] = useSearchParams();
-  
   useEffect(() => {
-    console.log('co thay doi khi pagination thay doi?');
     let searchParamsObject = {}
 
     let params = []
@@ -25,12 +23,11 @@ const List = () => {
     params.forEach(item => {
       searchParamsObject[item[0]] = item[1]
     })
-    console.log(searchParamsObject);
     dispatch(getPosts(searchParamsObject))
-    // window.scrollTo({ top: 0, behavior: 'smooth' }); 
+    window.scrollTo({ top: 0, behavior: 'smooth' }); 
   }, [location.pathname, searchParams])
   return (
-    <div className='flex flex-col border border-[borderItem]'>
+    <div className='flex flex-col border   bg-gray-100 rounded-md shadow-md'>
       <div className='w-full p-4'>
         <div className='flex flex-row justify-between'>
           <span className='font-bold text-xl'>Tổng {count} kết quả</span>
@@ -55,10 +52,10 @@ const List = () => {
             custom={'shadow-md mt-0 mx-1 hover:font-bold hover:bg-[#e7f0f7] px-4 py-2'} />
         </div>
       </div>
-      <div className='w-full'>
-        {data || data.length != 0 ? data?.map(el => {
+      <div className={'w-full min-h-[180px] flex flex-col justify-center items-center'} >
+        {data && data.length != 0 ? data?.map(el => {
           return <Item key={el.id} object={el} />
-        }) : '(Không tìm thấy kết quả)'}
+        }) : <span className='text-red-500 italic py-10 px-10 font-semibold text-[24px]'>Hiện chưa có tin đăng tại khu vực này</span>}
       </div>
     </div>
 

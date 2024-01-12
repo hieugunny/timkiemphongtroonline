@@ -1,10 +1,9 @@
 import actionTypes from './actionTypes'
-import { apiLogin, apiRegister } from '../../apis/auth'
-export const register = (payLoad) => async (dispatch) => { 
+import { apiLogin, apiRegister, apiLogout } from '../../apis/auth'
+export const register = (payLoad) => async (dispatch) => {
     try {
         const res = await apiRegister(payLoad)
-        console.log(res);
-        if(res?.data.err === 1){
+        if (res?.data.err === 1) {
             dispatch({
                 type: actionTypes.REGISTER_SUCCESS,
                 data: res.data
@@ -16,16 +15,14 @@ export const register = (payLoad) => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: actionTypes.REGISTER_FAIL,
-            data: null  
+            data: null
         })
     }
 }
-export const login = (payLoad) => async (dispatch) => { 
+export const login = (payLoad) => async (dispatch) => {
     try {
-        const res = await apiLogin(payLoad) 
-        console.log(res); 
-        console.log('login'); 
-        if(res?.data.err === 1){ 
+        const res = await apiLogin(payLoad)
+        if (res?.data.err === 1) {
             dispatch({
                 type: actionTypes.LOGIN_SUCCESS,
                 data: res.data
@@ -42,4 +39,10 @@ export const login = (payLoad) => async (dispatch) => {
     }
 }
 
-export const logout = () => ({type: actionTypes.LOGOUT})
+export const logout = (payLoad) => async (dispatch) => { 
+        dispatch({
+            type: actionTypes.LOGOUT,
+            data: false
+        }) 
+}
+//  () => ({type: actionTypes.LOGOUT, data: false})

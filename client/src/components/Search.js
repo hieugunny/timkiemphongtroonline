@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { SearchItem, Modal } from '../components'
+import { SearchItem, Modal, ModalV2 } from '../components'
 import icons from '../ultils/icons'
 import { useDispatch, useSelector } from 'react-redux'
 import * as actions from '../store/actions'
@@ -10,8 +10,8 @@ const {
   LuMapPin,
   IoPricetagOutline,
   HiOutlineBuildingOffice2,
-  BsTextareaResize, FiDelete, IoIosSearch } = icons
-const Search = ( ) => {
+  BsTextareaResize, IoIosSearch } = icons
+const Search = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { provinces, districts, wards, msg } = useSelector(state => state.province)
@@ -24,8 +24,13 @@ const Search = ( ) => {
   const [categoryData, setCategoryData] = useState(categories[0])
   const [addressText, setAddressText] = useState('')
   const [categoryText, setCategoryText] = useState('')
+  const [price, setPrice] = useState()
+  const [priceText, setPriceText] = useState(null)
+  const [roomAreaText, setRoomAreaText] = useState(null)
+  const [roomArea, setRoomArea] = useState('')
   const [searchParams, setSearchParams] = useSearchParams();
   const [isSubmit, setIsSubmit] = useState(false)
+  const [payload, setPayload] = useState({})
   useEffect(() => {
     dispatch(actions.getCategories())
   }, [])
@@ -34,17 +39,24 @@ const Search = ( ) => {
       setCategoryData(dataModal)
     } else if (dataModal?.type === 'province') {
       setAddressData(dataModal)
+    } else if (dataModal?.type === 'price') {
+      {
+        setAddressData(dataModal)
+        console.log('type price');
+      }
+    } else if (dataModal?.type === 'roomArea') {
+      setAddressData(dataModal)
     }
   }, [dataModal])
   //set text 
   useEffect(() => {
-  }, [isSubmit])
-  // useEffect(() => { 
-  //   if (categoryData) {
-  //     setCategoryText(categoryData.name)
-  //   }
-  // }, [categoryData?.code, isSubmit])
-  // xu li searchparam
+    if (payload?.price) {
+      setPriceText(`${payload.price[0] > 1000000 ? payload.price[0] / 1000000 : payload.price[0]} - ${payload.price[1] > 1000000 ? payload.price[1] / 1000000 : payload.price[1]} triệu`)
+    }
+    if (payload?.roomArea) {
+      setRoomAreaText(`${payload.roomArea[0]} - ${payload.roomArea[1]} m2`)
+    }
+  }, [payload])
 
   useEffect(() => {
     ;
@@ -60,19 +72,27 @@ const Search = ( ) => {
   }, [categoryData?.code])
   function handleShowModel(type) {
     setIsShowModal(true)
-    setTypeModal(type) // Xác định loại dữ liệu mà người dùng cần lọc : price, address, category, acreage
+    setTypeModal(type) // Xác định loại dữ liệu mà người dùng cần lọc : price, address, category, roomArea
   }
-  function handleSubmit() { 
-    dispatch(actions.setSearch(!isSearch))
-    let params = {}
-    if (categoryData) params.category_code = categoryData.code
-    if (addressData)
-      Object.entries(addressData)?.forEach(element => {
-        if (element[0] !== 'type')
-          params[element[0]] = element[1]
-            .replace('Thành phố ', '')
-            .replace('Tỉnh ', '')
-      }); 
+  function handleSubmit() {
+    let params = {} 
+    Object.keys(payload).forEach(element => {
+      if(!payload[element])
+      {
+        delete payload[element]
+        setPayload(payload)
+      }
+    });
+    params=payload
+    console.log(params);
+    if(payload?.price) {
+      params = {...params,priceFrom:payload.price[0],priceTo:payload.price[1]}
+      delete params.price
+    }
+    if(payload?.roomArea){
+      params = {...params,roomAreaFrom:payload.roomArea[0],roomAreaTo:payload.roomArea[1]}
+      delete params.roomArea
+    }
     navigate({
       pathname: '',
       search: createSearchParams(params).toString(),
@@ -80,17 +100,18 @@ const Search = ( ) => {
   }
   return (
     <>
-      <div className='gap-1 items-center flex flex-row bg-[#febb02] justify-between h-[55px] rounded-md px-[8px] py-2'>
-        <span onClick={() => handleShowModel('category')} className='py-2 flex-1'> <SearchItem icon={<HiOutlineBuildingOffice2 />} text={categoryText || categories[0]?.name} defaultText={''} /></span>
-        <span onClick={() => handleShowModel('province')} className='py-2 flex-1'> <SearchItem icon={<LuMapPin />} text={addressText} defaultText={'Toàn quốc'} /></span>
-        <span onClick={() => handleShowModel('price')} className='py-2 flex-1'> <SearchItem icon={<IoPricetagOutline />} defaultText={'Giá'} /></span>
-        <span onClick={() => handleShowModel('acreage')} className='py-2 flex-1'> <SearchItem icon={<BsTextareaResize />} defaultText={'Diện tích'} /></span>
+      <div className=' gap-1 items-center flex flex-row bg-[#febb02] justify-between h-[55px] rounded-md px-[8px] py-2'>
+        <span onClick={() => handleShowModel('category')} className='cursor-pointer py-2 flex-1'> <SearchItem icon={<HiOutlineBuildingOffice2 />} text={categoryText || categories[0]?.name} defaultText={''} /></span>
+        <span onClick={() => handleShowModel('province')} className='cursor-pointer py-2 flex-1'> <SearchItem icon={<LuMapPin />} text={addressText} defaultText={'Toàn quốc'} /></span>
+        <span onClick={() => handleShowModel('price')} className='cursor-pointer py-2 flex-1'> <SearchItem icon={<IoPricetagOutline />} text={priceText} defaultText={'Giá'} /></span>
+        <span onClick={() => handleShowModel('roomArea')} className='cursor-pointer py-2 flex-1'> <SearchItem icon={<BsTextareaResize />} text={roomAreaText} defaultText={'Diện tích'} /></span>
         <div onClick={() => handleSubmit()} className='cursor-pointer py-2 flex-1 font-bold flex justify-center items-center gap-1 bg-secondary1 text-white rounded-md   text-xs '>
           <IoIosSearch />
           <span>Tìm kiếm</span>
         </div>
       </div>
-      {isShowModal && <Modal type={typeModal} getData={setDataModal} setIsShowModal={setIsShowModal} />}
+      {((typeModal === 'province' || typeModal === 'category') && isShowModal) && <Modal type={typeModal} getData={setDataModal} setPayload={setPayload} setIsShowModal={setIsShowModal} />}
+      {((typeModal === 'price' || typeModal === 'roomArea') && isShowModal) && <ModalV2 type={typeModal} getData={setDataModal} setPayload={setPayload} setIsShowModal={setIsShowModal} />}
     </>
   )
 }

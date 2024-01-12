@@ -8,7 +8,7 @@ const {
     FaUserCircle, //user
     IoExitOutline, //exit
 } = icons
-const menuMange = [
+const menuManage = [
     {
         id:1,
         text:'Đăng tin cho thuê',
@@ -18,7 +18,7 @@ const menuMange = [
     {
         id:2,
         text:'Quản lý tin đăng',
-        path:'/he-thong/quan-ly-tin-dang',
+        path:'/he-thong/quan-ly-bai-dang',
         icon:<MdContentPasteSearch/>
     },
     {
@@ -36,7 +36,7 @@ const menuMange = [
     {
         id:5,
         text:'Thông tin cá nhân',
-        path:'/he-thong/thong-tin-ca-nhan',
+        path:'/he-thong/cap-nhat-thong-tin-ca-nhan',
         icon:<FaUserCircle/>
     },
     {
@@ -45,6 +45,12 @@ const menuMange = [
         path:'/he-thong/tin-da-luu',
         icon:<RiHeartLine/>
     },
+    {
+        id:7,
+        text:'Danh sách tài khoản',
+        path:'/he-thong/tin-da-luu',
+        icon:<RiHeartLine/>
+    },
 ]
 
-export default menuMange
+export default menuManage

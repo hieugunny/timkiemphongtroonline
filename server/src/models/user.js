@@ -13,17 +13,22 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       User.belongsTo(models.Role, {foreignKey: 'role_code',targetKey: 'code', as: 'roleData'})
       User.hasMany(models.Post, { foreignKey:'userId' , as: 'postData'}) 
+      User.hasMany(models.Payment, { foreignKey:'userId' , as: 'paymentData'}) 
     }
   }
   User.init({
     name: DataTypes.STRING,
     password: DataTypes.STRING,
     mobile: DataTypes.STRING,
+    zalo: DataTypes.STRING,
     money: {
       type: DataTypes.FLOAT,
       defaultValue: 0
     },
-    avatar: DataTypes.STRING,
+    avatar: {
+      type:DataTypes.STRING,
+      defaultValue:'https://phongtro123.com/images/default-user.png'
+    },
     role_code: {
       type: DataTypes.STRING,
       defaultValue: 'r2'

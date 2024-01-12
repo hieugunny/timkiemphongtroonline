@@ -23,6 +23,7 @@ export const getProvince = ({ code }) => new Promise(async (resolve, reject) => 
 })
 export const getDistrict = ({ code }) => new Promise(async (resolve, reject) => {
     try {
+        console.log(code);
         if (!code) {
             code = { [Op.gte]: 0 }
         }

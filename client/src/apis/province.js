@@ -1,11 +1,10 @@
 import axios from '../axios.config'
  
-export const apiGetProvince =async (params) => new Promise(async (resolve, reject) => {
+export const apiGetProvince =async ( ) => new Promise(async (resolve, reject) => {
     try {
         const res = await axios({
             method: 'get',
-            url: '/province/p',
-            params
+            url: '/province/p', 
         })
         resolve(res)
     } catch (error) {

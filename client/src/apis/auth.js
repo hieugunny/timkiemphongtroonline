@@ -9,7 +9,7 @@ export const apiRegister =async (payload) => new Promise(async (resolve, reject)
         })
         resolve(res)
     } catch (error) {
-        reject(error)
+        reject(error)   
     }
 });
 export const apiLogin =async (payload) => new Promise(async (resolve, reject) => {
@@ -17,6 +17,18 @@ export const apiLogin =async (payload) => new Promise(async (resolve, reject) =>
         const res = await axios({
             method: 'post',
             url: '/auth/login',
+            data: payload
+        })
+        resolve(res)
+    } catch (error) {
+        reject(error)
+    }
+});
+export const apiLogout =async (payload) => new Promise(async (resolve, reject) => {
+    try {
+        const res = await axios({
+            method: 'post',
+            url: '/auth/logout',
             data: payload
         })
         resolve(res)

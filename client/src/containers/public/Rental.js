@@ -2,15 +2,15 @@ import React, { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { useLocation } from 'react-router-dom'
-import { List, Search, Pagination } from '../../components'
-import { getPosts } from '../../store/actions'
+import { List, Search, Pagination, SliderRange } from '../../components'
+import { getPosts } from '../../store/actions' 
 import icons from '../../ultils/icons'
 const { IoMdArrowDropright } = icons
 // import {IoMdArrowDropright} from '../../ultils/icons'
 function Rental() {    
   return (
-    <div className='border  w-full flex flex-col gap-3'>
-      < Search  />
+    <div className=' w-full flex flex-col gap-3 '> 
+      <div className='w-[1000px]'> < Search  /> </div>
       <div> 
         <header>
           <h1 className='font-bold text-3xl mb-[10px] mt-[10px]'>Cho Thuê Phòng Trọ, Giá Rẻ, Tiện Nghi, Mới Nhất 2023</h1>
@@ -32,15 +32,15 @@ function Rental() {
             <a className='flex flex-col border border-[borderItem] rounded-lg overflow-hidden w-[220px] mx-[10px] shadow-md ' href='' alt='Cho thuê phòng trọ Hồ Chí Minh' >
               <img src='https://res.klook.com/image/upload/fl_lossy.progressive,w_800,c_fill,q_85/destination/ur2mrg23d91mex03l4mw.jpg'
                 className=' h-[110px] object-cover' />
-              <span className='px-[10px] py-[12px] text-xs text-[#1266dd] font-bold text-center'>Phòng trọ Hồ Chí Minh</span>
+              <span className='px-[10px] py-[12px] text-xs text-[#1266dd] font-bold text-center'>Phòng trọ Đà Nẵng</span>
             </a>
           </div>
         </section> 
       </div>
 
       <div className='w-full flex gap-4'>
-        <div className='w-[70%] border  rounded-md shadow-md'>
-          <div>
+        <div className='w-[70%] '>
+          <div> 
             <List key={'list-phong-tro'} />
             <Pagination  />
           </div>

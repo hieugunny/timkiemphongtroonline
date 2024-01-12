@@ -10,19 +10,20 @@ const Home = () => {
   useEffect(() => {
     setTimeout(() => {
       isLoggedIn && dispatch(getCurrentUser())
-    }, 500);
-  }, [isLoggedIn])
-
+    }, 100);
+  }, []) 
+  
   return (
-    <div className='w-1100 m-auto bg-[#f5f5f5]   '>
+    <div className='w-full  px-10 bg-[#f5f5f5]    flex justify-center flex-col     '>
+    {/* <div className='w-full  px-10 bg-[#f5f5f5]    flex justify-center flex-col    bg-gradient-to-r from-purple-500 to-pink-500 '> */}
       <Header />
       <Navigation />
-
-      <div className='w-full'>
+      <div></div>
+      <div className='w-full    '>
         <Outlet />
       </div>
       <Footer />
-    </div>
+    </div>  
 
   )
 }

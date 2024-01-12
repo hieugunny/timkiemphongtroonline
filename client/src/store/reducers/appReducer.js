@@ -1,14 +1,14 @@
 import actionType from '../actions/actionTypes'
 const initState = {
-    isSearch: false
+    count:-1
 }
 
 const appReducer = (state = initState,action ) => {  
     switch (action.type) {
-        case actionType.SEARCH:
+        case actionType.FAVOURITE:
             return {
                 ...state,
-                isSearch: action.isSearch  
+                count: action.count  
             }  
         default:return state
     }

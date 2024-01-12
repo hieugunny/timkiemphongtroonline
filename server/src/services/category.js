@@ -5,8 +5,7 @@ export const getCategories =() => new Promise(async (resolve, reject) => {
         resolve({
             err: response ? 1:0,
             msg: response ?  'Got it' : 'Cate not found',
-            data: response?.map(el => {
-                console.log(el.id);
+            data: response?.map(el => { 
                 return {
                     id: el.id,
                     name: el.value,

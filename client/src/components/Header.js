@@ -1,9 +1,9 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import logo from '../assets/logo.png'
-import { Button } from '.'
+import { Button, User } from '.'
 import { CiCirclePlus } from "react-icons/ci"
 import icons from '../ultils/icons'
-import menuMange from '../ultils/menuMange'
+import menuMange from '../ultils/menuManage'
 import { useNavigate, Link } from 'react-router-dom'
 import path from '../ultils/contants'
 import { useDispatch, useSelector } from 'react-redux'
@@ -16,20 +16,31 @@ const { AiOutlinePlusCircle,
 function Header() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const { isLoggedIn } = useSelector(state => state.auth)
-    const { userData } = useSelector(state => state.user)
+    const { count } = useSelector(state => state.app)
+    const { isLoggedIn, token, msg: authLog } = useSelector(state => state.auth)
+    const { userData, msg: userLog } = useSelector(state => state.user)
     const [isShowMenu, setIsShowMenu] = useState(false)
-    console.log(isShowMenu);
-    console.log(userData);
+    const [countFavouriteList, setCountFavouriteList] = useState(0)
     function handlerShowMenu() {
         setIsShowMenu(prev => !prev)
     }
+
+    useEffect(() => { 
+        let listPost = JSON.parse(localStorage.getItem("post_favourite") || '[]').length;
+        setCountFavouriteList(count ===-1? listPost:count)
+    }, [count])
+    useEffect(() => { 
+        dispatch(actions.getCurrentUser())
+    }, [])
+
+    const goSystem = useCallback(() => {
+        navigate(path.SYSTEM)
+    }, [])
     const goLogin = useCallback((flag) => {
         navigate(path.LOGIN, { state: flag })
     }, [])
     return (
-        <div className='w-1100 flex items-center justify-between h-[70px]'
-        >
+        <div className='w-full flex items-center justify-between h-[70px]' >
             <Link to={'/'}>
                 <img
                     src={logo}
@@ -37,28 +48,20 @@ function Header() {
                     className='w-[240px] h-[70px] object-contain cursor-pointer'
                 />
             </Link>
-
             <div className='flex items-center'>
-
                 {isLoggedIn ?
                     <div className='flex items-center gap-6'>
-                        <div className='user-welcome flex flex-row items-center gap-2 cursor-pointer '>
-                            <div>
-                                <img className='object-cover h-10 w-10 rounded-full' src='https://phongtro123.com/images/default-user.png' />
-                            </div>
-                            <div className='flex flex-col'>
-                                <span className='text-sm'>Xin chao, <strong>{userData.name}</strong></span>
-                                <span className='text-xs'>Mã tài khoản: <strong>{userData.id}</strong></span>
-                                <span className='text-xs'>TK chính: <strong>{userData?.money || 0} VNĐ</strong></span>
-                            </div>
-                        </div>
-                        <div className='flex flex-row items-center gap-1 text-xs hover:underline cursor-pointer py-3'>
-                            <RiHeartLine size={20} />
+                        <User userData={userData} />
+                        <Link className='relative flex flex-row items-center gap-1 text-xs hover:underline cursor-pointer py-3'
+                            to={path.FAVOURITE_POST}
+                        >
+                            <RiHeartLine size={20} className='' />
                             <span>Yêu thích</span>
-                        </div>
+                            {countFavouriteList !== 0 && <span className='top-[7px] right-[59px] absolute rounded-md bg-red-600 h-[16px] w-[16px] flex justify-center items-center text-white text-[10px] font-thin '>{countFavouriteList}</span>}
+                        </Link>
 
-                        <div className='relative'>
-                            <div onClick={()=> handlerShowMenu()} className='px-1 flex flex-row items-center gap-1 text-xs hover:underline cursor-pointer py-3'>
+                        <div className=''>
+                            <div onClick={() => handlerShowMenu()} className='px-1 flex flex-row items-center gap-1 text-xs hover:underline cursor-pointer py-3'>
                                 <GrAppsRounded size={20} />
                                 <span>Quản lý tài khoản</span>
                             </div>
@@ -75,7 +78,7 @@ function Header() {
                                             </Link>
                                         </li>)
                                     })}
-                                    <li    onClick={() => dispatch(actions.logout())} className='hover:text-orange-500 cursor-pointer flex flex-row items-center py-2 border-b border-gray-200 gap-2 '>
+                                    <li onClick={() => dispatch(actions.logout({userId: userData?.id, token: token?.access_token}))} className='hover:text-orange-500 cursor-pointer flex flex-row items-center py-2 border-b border-gray-200 gap-2 '>
                                         <IoExitOutline />
                                         <span className='w-full'>Thoát</span>
                                     </li>

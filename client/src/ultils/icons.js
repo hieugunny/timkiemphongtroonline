@@ -1,21 +1,23 @@
-import { AiOutlinePlusCircle, AiOutlineLogout } from 'react-icons/ai'
+import { AiOutlinePlusCircle, AiOutlineLogout,AiOutlineDollarCircle } from 'react-icons/ai'
 import { GrNext, GrStar, GrLinkNext, GrLinkPrevious, GrAppsRounded} from 'react-icons/gr'
 import { BsChevronRight, BsBookmarkStarFill, BsChevronDown, BsCameraFill, BsTextareaResize } from 'react-icons/bs'
 import { HiOutlineLocationMarker } from 'react-icons/hi'
 import { TbReportMoney, TbMathGreater } from 'react-icons/tb'
-import { RiCrop2Line, RiHeartFill, RiHeartLine } from 'react-icons/ri'
+import { RiCrop2Line, RiHeartFill, RiHeartLine, RiMoneyDollarCircleLine } from 'react-icons/ri'
 import { MdOutlineHouseSiding, MdOutlineLibraryBooks, MdContentPasteSearch, MdOutlineHistory} from 'react-icons/md'
-import { FiSearch, FiDelete } from 'react-icons/fi'
+import { FiSearch, FiDelete, FiDollarSign } from 'react-icons/fi'
 import { ImPencil2, ImBin } from 'react-icons/im'
-import { BiUserPin } from 'react-icons/bi'
-import { IoMdArrowDropright } from "react-icons/io";
-import { IoIosArrowBack, IoIosArrowForward, IoIosSearch } from "react-icons/io";
-import { LuMapPin } from "react-icons/lu";
-import { IoPricetagOutline, IoExitOutline } from "react-icons/io5";
+import { BiUserPin } from 'react-icons/bi' 
+import { IoIosArrowBack, IoIosArrowForward, IoIosSearch, IoMdArrowDropright, IoIosArrowDropleftCircle,IoIosArrowDroprightCircle} from "react-icons/io";
+import { LuMapPin } from "react-icons/lu"; 
 import { HiOutlineBuildingOffice2,HiPencilSquare } from "react-icons/hi2";
-import { GoArrowLeft } from "react-icons/go"; 
-import { IoCardOutline } from "react-icons/io5";
-import { FaUserCircle } from "react-icons/fa";
+import { GoArrowLeft, GoClock, GoPaste } from "react-icons/go"; 
+import { IoCardOutline,IoCameraOutline , IoPricetagOutline, IoExitOutline, IoChatbubbleOutline} from "react-icons/io5";
+import { FaUserCircle, FaMapMarkerAlt ,FaPhoneAlt} from "react-icons/fa";
+import { LiaNewspaper } from "react-icons/lia";
+import { TfiPencilAlt } from "react-icons/tfi";
+import { CiCalendar, CiHashtag } from "react-icons/ci";
+import { RxExit } from "react-icons/rx";
 const icons = {
     AiOutlinePlusCircle,
     GrNext,
@@ -57,6 +59,25 @@ const icons = {
     MdOutlineHistory, // history 
     FaUserCircle, //user
     IoExitOutline, //exit
+
+    LiaNewspaper,
+    TfiPencilAlt,
+    FiDollarSign,
+    GoClock,
+    CiCalendar,
+    GoPaste,
+    IoChatbubbleOutline,
+    RxExit,
+
+    IoCameraOutline,
+
+    IoIosArrowDropleftCircle,
+    IoIosArrowDroprightCircle,
+    CiHashtag,
+    FaMapMarkerAlt,
+    RiMoneyDollarCircleLine,
+    AiOutlineDollarCircle,
+    FaPhoneAlt
 }
 
 export default icons
